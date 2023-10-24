@@ -1,0 +1,8 @@
+{
+	"select   destinationUserName, SUM(cnt) from  (SELECT   destinationUserName, COUNT(destinationUserName) as cnt FROM savrus.data where srtd >= '2023-09-12'AND srtd <= '2023-09-20' AND (srt >= 1694608869) AND (srt <= 1695213669)   and notEmpty(toString(  destinationUserName)) GROUP BY   destinationUserName ) group by   destinationUserName ORDER BY sum(cnt) DESC": [
+	{
+		"destinationUserName" : "WIN-DU2AEP852C4$",
+		"sum(cnt)" : 1519
+	}
+]}
+	
