@@ -21,7 +21,7 @@
 </template>
 
 <script>
-
+//
 // Наши компоненты
 import RadarView from './components/RadarView.vue';
 import TableActiveChannel from './components/TableActiveChannel.vue'; 
