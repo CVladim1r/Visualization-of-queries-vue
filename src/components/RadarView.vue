@@ -14,6 +14,7 @@ export default {
   props: {
     targets: Array,
   },
+  
   mounted() {
     const labels = this.targets.map(target => target.number);
     const data = this.targets.map(target => target.cnt);
@@ -21,14 +22,16 @@ export default {
     
     new Chart(ctx, {
       type: 'radar',
+
+      // Временное решение, надо доработать server.py
       data: {
         labels,
         datasets: [{
-          label: 'Targets',
+          label: 'Цели',
           data,
-          backgroundColor: 'rgba(255, 255, 255, 0.2)', // изменен на белый
-          borderColor: 'rgba(255,255,255,1)', // изменен на белый
-          pointBackgroundColor: 'rgba(255,255,255,1)', // изменен на белый
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          borderColor: '#579cd7',
+          pointBackgroundColor: 'rgba(255,255,255,1)', 
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(255,99,132,1)',
@@ -40,10 +43,10 @@ export default {
         scales: {
           r: {
             angleLines: {
-              color: '#888' // добавлены серые линии углов
+              color: '#888'  // Добавлены серые линии углов
             },
             grid: {
-              color: '#555' // добавлена темная сетка
+              color: '#555' // Добавлена темная сетка
             }
           }
         }

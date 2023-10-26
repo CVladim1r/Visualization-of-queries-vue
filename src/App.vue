@@ -1,31 +1,28 @@
 <template>
   <section class="main-hub">
-    <div id="app">
+    <h1>Vue App</h1>
+    <div class="radar-and-pie">
+      <div>
+        <RadarView :targets="radarData" />
+      </div>
+      <div>
+        <PieChart />
+      </div>
+    </div>
+    
+    <div>
+      <bar-chart />
+    </div>
+    <div>
       <h1>Active Channels Table</h1>
       <TableActiveChannel />
     </div>
-    <div id="app">
-      <RadarView :targets="radarData" />
-    </div>
-    <div>
-     
-    </div>
-    <div id="app">
-      <PieChart :data="jsonData" />
-      <BarChart :data="jsonData" />
-
-    </div>
-
-
-    
   </section>
 </template>
 
 <script>
 import RadarView from './components/RadarView.vue';
 import TableActiveChannel from './components/TableActiveChannel.vue'; 
-//import DonutChartComponent from './components/DonutChartComponent.vue';   <DonutChartComponent :data="donutChartData" /> 
-import jsonData from './assets/diagram.json'; // JSON-файл
 
 import PieChart from "./components/PieChart.vue";
 import BarChart from "./components/BarChart.vue";
@@ -36,17 +33,22 @@ export default {
 
   components: {
     TableActiveChannel,
-    // DonutChartComponent,
+
     RadarView,
 
     PieChart,
     BarChart,
   },
+
+
+
+
+
+// Просто засоряем фронт
+// Временное решение, надо доработать server.py
   data() {
     return {
-      jsonData: [
 
-      ],
       radarData: [
       {
         "argument" : "Events",
@@ -105,21 +107,8 @@ export default {
         "cnt" : 132804
       }
       ],
-      donutChartData: jsonData[
-        "select destinationUserName, SUM(cnt) from (SELECT destinationUserName, COUNT(destinationUserName) as cnt FROM savrus.data where srtd >= '2023-09-12' AND srtd <= '2023-09-20' AND (srt >= 1694608869) AND (srt <= 1695213669) and notEmpty(toString(destinationUserName)) GROUP BY destinationUserName ) group by destinationUserName ORDER BY sum(cnt) DESC"
-      ],
-
       
     };
-  },
-  created() {
-    // Загрузка данных из JSON файла
-    fetch("/d.json")
-    .then((response) => response.json())
-    .then((data) => {
-      this.jsonData = data;
-      console.log("Data loaded:", data);
-    });
   },
 
  
@@ -129,17 +118,26 @@ export default {
 
 
 <style scoped>
-.radar {
+
+h1{
+  color: aliceblue;
+}.radar {
   position: relative;
   width: 400px;
   height: 400px;
   border: 2px solid #000;
-  background-color: #3d3d3d; 
+  background-color: #252527
+}
+.main-hub{
+  background-color: #252527
 }
 #app {
-  background-color: rgb(75, 75, 75)}
+  background-color: #252527}
 .target {
   position: relative;
 }
 
+.radar-and-pie{
+  display: flex;
+}
 </style>

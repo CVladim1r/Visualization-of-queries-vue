@@ -1,58 +1,64 @@
 <template>
-    <div>
-      <h2>Pie Chart</h2>
-      <Doughnut :data="chartData" :options="chartOptions" />
-    </div>
-  </template>
-  
-  <script>
-  import { Doughnut } from 'vue-chartjs';
-  import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-  import axios from 'axios';
-  
-  ChartJS.register(ArcElement, Tooltip, Legend);
-  
-  export default {
-    name: 'PieChart',
-    extends: Doughnut,
-    data() {
-      return {
-        data: [], // To store the data fetched from d.json
-      };
-    },
-    computed: {
-      chartData() {
-        const labels = this.data.map((item) => item.destinationAddress);
-        const data = this.data.map((item) => item['sum(cnt)']);
-  
-        return {
-          labels,
-          datasets: [
-            {
-              backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-              data,
+  <div>
+    <apexchart class="donut" type="donut" :options="chartOptions" :series="series" style="width: 550px; height: 550px; color: #fff;"></apexchart>
+  </div>
+</template>
+
+<script>
+import VueApexCharts from 'vue3-apexcharts'
+import data from '../assets/pie-chart.json'
+
+export default {
+  name: 'DonutChart',
+  components: {
+    apexchart: VueApexCharts,
+  },
+  data() {
+    return {
+      series: [],
+      chartOptions: {
+        chart: {
+          width: 120, // Фиксированная ширина 100px
+          height: 120, // Фиксированная высота 100px
+          type: 'donut',
+        },
+        colors: ['#579cd7', '#636bf2', '#c17b40', '#fa486c'], //Цвета для круговой диаграммы
+        labels: [],
+        plotOptions: {
+          pie: {
+            size: 100, // Размер круга (100%)
+            customScale: 0.8,
+            donut: {
+              size: '60%', // Размер дырки внутри (60%)
             },
-          ],
-        };
+          },
+        },
+        legend: {
+          position: 'bottom',
+          color: "#579cd7",
+        },
       },
-      chartOptions() {
-        return {
-          responsive: true,
-          maintainAspectRatio: false,
-        };
-      },
-    },
-    mounted() {
-      axios
-        .get('/d.json') // Assuming d.json is located in the public directory
-        .then((response) => {
-          this.data = response.data;
-          this.renderChart(this.chartData, this.chartOptions);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    },
-  };
-  </script>
-  
+    }
+  },
+  mounted() {
+    try {
+      const labels = []
+      const series = []
+      // Временное решение, надо доработать server.py
+      for (const { destinationUserName, 'sum(cnt)': sumCnt } of data) {
+        labels.push(destinationUserName)
+        series.push(sumCnt)
+      }
+      this.series = series
+      this.chartOptions.labels = labels
+      this.$refs.chart.updateOptions(this.chartOptions)
+    } catch (error) {
+      console.error('Ошибка при обработке данных:', error)
+      // Дополнительные действия по обработке ошибки, если необходимо
+    }
+  },
+}
+</script>
+
+<style >
+</style>

@@ -1,5 +1,5 @@
-{
-"select   destinationAddress, SUM(cnt) from  (SELECT   destinationAddress, COUNT(destinationAddress) as cnt FROM savrus.data where srtd >= '2023-09-12' AND srtd <= '2023-09-20' AND (srt >= 1694608869) AND (srt <= 1695213669)   and notEmpty(toString(  destinationAddress)) GROUP BY   destinationAddress ) group by   destinationAddress ORDER BY sum(cnt) DESC": [
+[
+	
 	{
 		"destinationAddress" : "172.16.128.38",
 		"sum(cnt)" : 553820
@@ -852,4 +852,4 @@
 		"destinationAddress" : "51.132.193.104",
 		"sum(cnt)" : 1
 	}
-]}
+]
