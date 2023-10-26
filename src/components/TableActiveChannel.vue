@@ -45,6 +45,7 @@ export default {
       currentIndex: 0,
       searchText: "",
       tableColumns: [
+        // Столбцы
         { label: "SRT", field: "SRT", width: "5%" },
         { label: "Name", field: "name", width: "25%" },
         { label: "Severity", field: "severity", width: "5%" },

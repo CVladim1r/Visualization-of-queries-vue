@@ -21,9 +21,10 @@
 </template>
 
 <script>
+
+// Наши компоненты
 import RadarView from './components/RadarView.vue';
 import TableActiveChannel from './components/TableActiveChannel.vue'; 
-
 import PieChart from "./components/PieChart.vue";
 import BarChart from "./components/BarChart.vue";
 
@@ -33,9 +34,7 @@ export default {
 
   components: {
     TableActiveChannel,
-
     RadarView,
-
     PieChart,
     BarChart,
   },

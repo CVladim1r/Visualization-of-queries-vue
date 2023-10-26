@@ -20,7 +20,6 @@
         <vue-apex-charts :options="barWithGapsOptions" :series="chartSeries"></vue-apex-charts>
       </template>
       <template v-else-if="currentChartType === 'table'">
-        <!-- Вставьте здесь код для табличного отображения -->
       </template>
     </div>
   </div>
